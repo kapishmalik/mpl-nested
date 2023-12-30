@@ -7,9 +7,7 @@ def call(body) {
 
   // Executing the pipeline without additional configuration
   pipeline {
-    agent {
-      label MPL.agentLabel
-    }
+
     options {
       skipDefaultCheckout(true)
     }
