@@ -50,16 +50,5 @@ def call(body)
                 }
             }
         }
-        post {
-            always {
-                MPLPostStepsRun('always')
-            }
-            success {
-                MPLPostStepsRun('success')
-            }
-            failure {
-                MPLPostStepsRun('failure')
-            }
-        }
     }
 }
