@@ -36,7 +36,7 @@ def call(body)
         stages {
             stage('Build') {
               steps {
-                MPLModule()
+                MPLModule('Docker Build')
               }
             }
             stage('Push') {
@@ -48,6 +48,17 @@ def call(body)
                 steps {
                     MPLModule()
                 }
+            }
+        }
+        post {
+            always {
+                MPLPostStepsRun('always')
+            }
+            success {
+                MPLPostStepsRun('success')
+            }
+            failure {
+                MPLPostStepsRun('failure')
             }
         }
     }
