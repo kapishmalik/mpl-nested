@@ -1,0 +1,1 @@
+echo "Common code for docker push process"
