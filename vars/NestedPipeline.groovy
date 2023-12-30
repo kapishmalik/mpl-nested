@@ -35,39 +35,19 @@ def call(body)
         }
         stages {
             stage('Build') {
-                agent { label MPL.agentLabel }
-                steps {
-                    MPLModule('Checkout')
-                    MPLPipelineConfigMerge(MPLModule().build)
-                }
+              steps {
+                MPLModule()
+              }
             }
             stage('Push') {
-                agent none // Deploy should specify the agent in the module using `node`
-                when { expression { MPLModuleEnabled() } }
                 steps {
                     MPLModule()
                 }
             }
             stage('Test') {
-                when {
-                    beforeAgent true
-                    expression { MPLModuleEnabled() }
-                }
-                agent { label MPL.agentLabel }
                 steps {
                     MPLModule()
                 }
-            }
-        }
-        post {
-            always {
-                MPLPostStepsRun('always')
-            }
-            success {
-                MPLPostStepsRun('success')
-            }
-            failure {
-                MPLPostStepsRun('failure')
             }
         }
     }
