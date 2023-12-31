@@ -16,6 +16,11 @@ def call(body)
             skipDefaultCheckout true
         }
         stages {
+            stage('Checkout') {
+                steps {
+                    MPLModule()
+                }
+            }
             stage('Login') {
                 steps {
                     MPLModule()

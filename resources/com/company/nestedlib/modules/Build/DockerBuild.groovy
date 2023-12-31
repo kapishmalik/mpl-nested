@@ -3,7 +3,7 @@ DOCKER_IMAGE_NAME = "${CFG.'docker.DOCKER_ARTIFACTORY_URL'}${CFG.'docker.DOCKER_
 if (CFG.'use_podman')
 {
     sh "ls -alth ."
-    sh "podman build -t ${DOCKER_IMAGE_NAME} Dockerfile"
+    sh "podman build -t ${DOCKER_IMAGE_NAME} ."
 }
 else
 {
