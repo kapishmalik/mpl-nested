@@ -6,10 +6,7 @@ def call(body)
     // Init the MPL library
     MPLInit()
 
-    def MPL = MPLPipelineConfig(body, [
-            agent_label: '',
-            release_run: (env.BRANCH_NAME ?: '') == 'master'
-    ])
+    def MPL = MPLPipelineConfig(body, [agent_label: ''])
 
     pipeline {
         agent {
@@ -19,12 +16,12 @@ def call(body)
             skipDefaultCheckout true
         }
         stages {
-            stage('Build') {
+            stage('Login') {
                 steps {
                     MPLModule()
                 }
             }
-            stage('Login') {
+            stage('Build') {
                 steps {
                     MPLModule()
                 }
@@ -38,9 +35,6 @@ def call(body)
                 steps {
                     MPLModule()
                 }
-            }
-            stage("Update Release in Deployment Status View") {
-
                 steps {
                     script {
                         addDeployToDashboard(env: 'BUILD', buildNumber: "${currentBuild.number}")
