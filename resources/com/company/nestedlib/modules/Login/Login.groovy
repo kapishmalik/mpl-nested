@@ -2,7 +2,8 @@ echo "Docker login command to artifactory ${CFG.'docker.DOCKER_ARTIFACTORY_URL'}
 withCredentials([usernamePassword(credentialsId: "${CFG.'docker.DOCKER_ARTIFACTORY_CREDENTIAL_ID'}",
                                   usernameVariable: 'USERNAME',
                                   passwordVariable: 'PASSWORD')]) {
-    if (CFG.'env' == 'LOCAL')
+    echo "${CFG.'use-podman'}"
+    if (CFG.'use-podman')
     {
         sh "echo ${PASSWORD} | podman login -u ${USERNAME} --password-stdin ${CFG.'docker.DOCKER_ARTIFACTORY_URL'}"
     }
