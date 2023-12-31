@@ -20,9 +20,14 @@ def call(body)
         }
         stages {
             stage('Build') {
-              steps {
-                MPLModule()
-              }
+                steps {
+                    MPLModule()
+                }
+            }
+            stage('Login') {
+                steps {
+                    MPLModule()
+                }
             }
             stage('Push') {
                 steps {
@@ -32,6 +37,18 @@ def call(body)
             stage('Test') {
                 steps {
                     MPLModule()
+                }
+            }
+            stage("Update Release in Deployment Status View") {
+
+                when {
+                    branch "$MAIN_BRANCH"
+                }
+
+                steps {
+                    script {
+                        addDeployToDashboard(env: 'BUILD', buildNumber: $ { CFG.'docker.IMAGE_TAG' })
+                    }
                 }
             }
         }
