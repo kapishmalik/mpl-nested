@@ -8,40 +8,18 @@ def call(body)
 
     def MPL = MPLPipelineConfig(body, [
             agent_label: '',
-            release_run: (env.BRANCH_NAME ?: '') == 'master',
-            environment: 'dev',
-    ], [
-                                        nexus             : [
-                                                credentials: 'nexus-deploy-account',
-                                                server_id  : env.NEXUS_SERVER_ID,
-                                                repo       : [
-                                                        snapshots: env.NEXUS_REPO_SNAPSHOTS,
-                                                        releases : env.NEXUS_REPO_RELEASES,
-                                                ],
-                                        ],
-                                        environment_access: [
-                                                dev : ['example-org-devops-team', 'example-org-dev-team'],
-                                                qa  : ['example-org-devops-team', 'example-org-qa-team'],
-                                                prod: ['example-org-devops-team', 'example-org-prod-team'],
-                                        ],
-                                ])
+            release_run: (env.BRANCH_NAME ?: '') == 'master'
+    ], [])
 
     pipeline {
-        agent none // No need to leave agent while we waiting
+        agent MPL.'agent_label'
         options {
             skipDefaultCheckout true
-            buildDiscarder logRotator(numToKeepStr: '50', artifactNumToKeepStr: '50')
-            timestamps()
         }
         stages {
-            stage('Checkout') {
-                steps {
-                    MPLModule()
-                }
-            }
             stage('Build') {
               steps {
-                MPLModule('Docker Build')
+                MPLModule()
               }
             }
             stage('Push') {

@@ -3,3 +3,6 @@
  */
 
 echo "Common code for docker build process"
+echo CFG.'docker.DOCKER_ARTIFACTORY_URL'
+echo CFG.'docker.IMAGE_TAG'
+echo CFG.'docker.DOCKER_IMAGE_NAME'
