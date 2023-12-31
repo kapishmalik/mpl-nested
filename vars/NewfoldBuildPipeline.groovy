@@ -34,8 +34,6 @@ def call(body)
             stage('Test') {
                 steps {
                     MPLModule()
-                }
-                steps {
                     script {
                         addDeployToDashboard(env: 'BUILD', buildNumber: "${currentBuild.number}")
                     }
