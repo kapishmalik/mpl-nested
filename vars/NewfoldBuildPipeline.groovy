@@ -43,7 +43,7 @@ def call(body)
 
                 steps {
                     script {
-                        addDeployToDashboard(env: 'BUILD', buildNumber: ${currentBuild.number})
+                        addDeployToDashboard(env: 'BUILD', buildNumber: currentBuild.number)
                     }
                 }
             }
