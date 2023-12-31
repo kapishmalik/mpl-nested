@@ -5,14 +5,8 @@ def call(body)
 {
     // Init the MPL library
     MPLInit()
-
-    def MPL = MPLPipelineConfig(body, [agent_label: ''], )
-
+    
     pipeline {
-        options {
-            skipDefaultCheckout true
-            timestamps()
-        }
         stages {
             stage('Checkout') {
                 steps {
