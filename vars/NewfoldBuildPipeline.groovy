@@ -41,10 +41,6 @@ def call(body)
             }
             stage("Update Release in Deployment Status View") {
 
-                when {
-                    branch "$MAIN_BRANCH"
-                }
-
                 steps {
                     script {
                         addDeployToDashboard(env: 'BUILD', buildNumber: $ { CFG.'docker.IMAGE_TAG' })
