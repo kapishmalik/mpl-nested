@@ -9,7 +9,7 @@ def call(body)
     def MPL = MPLPipelineConfig(body, [
             agent_label: '',
             release_run: (env.BRANCH_NAME ?: '') == 'master'
-    ], [])
+    ])
 
     pipeline {
         agent {
