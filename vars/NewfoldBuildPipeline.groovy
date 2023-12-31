@@ -8,8 +8,7 @@ def call(body)
 
     def MPL = MPLPipelineConfig(body, [
             agent_label: '',
-            release_run: (env.BRANCH_NAME ?: '') == 'master',
-            docker: [IMAGE_TAG: '${currentBuild.number}']
+            release_run: (env.BRANCH_NAME ?: '') == 'master'
     ])
 
     pipeline {
@@ -44,7 +43,7 @@ def call(body)
 
                 steps {
                     script {
-                        addDeployToDashboard(env: 'BUILD', buildNumber: MPL.'docker.IMAGE_TAG')
+                        addDeployToDashboard(env: 'BUILD', buildNumber: ${currentBuild.number})
                     }
                 }
             }
