@@ -2,7 +2,8 @@ echo "Code for docker build process"
 DOCKER_IMAGE_NAME = "${CFG.'docker.DOCKER_ARTIFACTORY_URL'}${CFG.'docker.DOCKER_ARTIFACTORY_PATH'}:${CFG.'docker.IMAGE_TAG'}"
 if (CFG.'use_podman')
 {
-    sh "podman build --pull -t ${DOCKER_IMAGE_NAME} ."
+    sh "ls -alth ."
+    sh "podman build -t ${DOCKER_IMAGE_NAME} Dockerfile"
 }
 else
 {
