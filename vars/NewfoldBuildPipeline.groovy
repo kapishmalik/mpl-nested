@@ -43,7 +43,7 @@ def call(body)
 
                 steps {
                     script {
-                        addDeployToDashboard(env: 'BUILD', buildNumber: $ { CFG.'docker.IMAGE_TAG' })
+                        addDeployToDashboard(env: 'BUILD', buildNumber: CFG.'docker.IMAGE_TAG')
                     }
                 }
             }
