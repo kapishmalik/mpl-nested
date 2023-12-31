@@ -36,7 +36,7 @@ def call(body)
         stages {
             stage('Checkout') {
                 steps {
-                    MPLModule('Docker Build')
+                    MPLModule()
                 }
             }
             stage('Build') {
