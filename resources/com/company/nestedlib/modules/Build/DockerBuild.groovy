@@ -1,7 +1,10 @@
-/**
- * Overridden MavenBuild module that uses original one from MPL
- */
-
-echo "Common code for docker build process"
-echo CFG.'docker.DOCKER_ARTIFACTORY_URL'
-echo CFG.'docker.IMAGE_TAG'
+echo "Code for docker build process"
+DOCKER_IMAGE_NAME = "${CFG.'docker.DOCKER_ARTIFACTORY_URL'}${CFG.'docker.DOCKER_ARTIFACTORY_PATH'}:${CFG.'docker.IMAGE_TAG'}"
+if (CFG.'use_podman')
+{
+    sh "podman build --pull -t ${DOCKER_IMAGE_NAME} ."
+}
+else
+{
+    sh "docker build --pull -t ${PGWEB_DOCKER_IMAGE_NAME} ."
+}
