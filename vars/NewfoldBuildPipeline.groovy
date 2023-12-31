@@ -12,7 +12,9 @@ def call(body)
     ], [])
 
     pipeline {
-        agent {MPL.agent_label}
+        agent {
+            label MPL.agentLabel
+        }
         options {
             skipDefaultCheckout true
         }
